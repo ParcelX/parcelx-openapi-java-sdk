@@ -1,3 +1,7 @@
+.idea
+target
+.settings
+
 # Compiled class file
 *.class
 
