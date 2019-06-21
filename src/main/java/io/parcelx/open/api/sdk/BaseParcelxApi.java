@@ -68,6 +68,7 @@ public class BaseParcelxApi implements JsonRpcInvoker {
     private ObjectMapper buildMapper() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.registerModule(new JavaTimeModule());
         return mapper;
     }

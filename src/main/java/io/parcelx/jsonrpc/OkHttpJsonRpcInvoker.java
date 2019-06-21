@@ -41,6 +41,7 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
         this.jsonNodeFactory = JsonNodeFactory.withExactBigDecimals(false);
 
         this.mapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
+        this.mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
 
     private static OkHttpClient getDefaultClient() {
