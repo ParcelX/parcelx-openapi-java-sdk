@@ -9,4 +9,8 @@ public class BatchApiException extends ApiException {
         super(-2, "JsonRpc批量调用错误");
         this.errors = errors;
     }
+
+    public List<ApiResponse> getErrors() {
+        return errors;
+    }
 }

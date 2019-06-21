@@ -9,20 +9,18 @@ public class ApiResponse {
     private final Error error;
     private ApiRequest request;
     private ObjectMapper mapper;
-    private JsonNode jsonResponse;
     private String id;
     private JsonNode jsonResult;
 
     public ApiResponse(ApiRequest request, JsonNode response, ObjectMapper mapper) throws ApiException {
         this.request = request;
         this.mapper = mapper;
-        this.jsonResponse = response;
-        this.id = this.jsonResponse.get("id").asText();
+        this.id = response.get("id").asText();
         if(this.id == null){
             throw new ApiException(-1, null);
         }
-        this.jsonResult = this.jsonResponse.get("result");
-        this.error = this.parseError(this.jsonResponse.get("error'"));
+        this.jsonResult = response.get("result");
+        this.error = this.parseError(response.get("error'"));
     }
 
     public <T> T getResult(Class<T> resultType) throws ApiInvokeException {

@@ -10,6 +10,7 @@ public class ApiBatchResponse {
     private final List<ApiResponse> responses;
     private final Map<String, ApiResponse> responseMap;
     private List<ApiResponse> errors;
+    private List<ApiResponse> correctResponses;
 
     public ApiBatchResponse(List<ApiResponse> responses) {
         this.responses = responses;
@@ -23,7 +24,6 @@ public class ApiBatchResponse {
     public ApiResponse getApiResponse(String requestId) {
         return this.responseMap.get(requestId);
     }
-
 
     public List<ApiResponse> getApiResponseList() {
         return responses;
@@ -58,6 +58,18 @@ public class ApiBatchResponse {
 
     public List<ApiResponse> getErrorResponses() {
         return ensureErrors();
+    }
+
+    private List<ApiResponse> ensureCorrect() {
+        if (correctResponses == null) {
+            correctResponses = responses.stream().filter(r -> !r.hasError()).collect(Collectors.toList());
+        }
+        return correctResponses;
+    }
+
+    public List<ApiResponse> getCorrectResponses() {
+        ensureCorrect();
+        return correctResponses;
     }
 
 }

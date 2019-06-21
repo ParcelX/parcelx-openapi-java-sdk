@@ -1,11 +1,4 @@
-# parcelx-openapi-java-sdk
-openapi java sdk
-
-## 使用范例
-
-```java
-
-package example;
+package io.parcelx;
 
 import io.parcelx.jsonrpc.ApiBatchResponse;
 import io.parcelx.jsonrpc.ApiException;
@@ -74,7 +67,3 @@ public class ExampleCode {
         }
     }
 }
-
-
-
-```

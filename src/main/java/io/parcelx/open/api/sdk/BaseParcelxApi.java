@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Random;
 
-public abstract class BaseParcelxApi implements JsonRpcInvoker {
+public class BaseParcelxApi implements JsonRpcInvoker {
 
     private final String apiKey;
     private final String apiSecret;
