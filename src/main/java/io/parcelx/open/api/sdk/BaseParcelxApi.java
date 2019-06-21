@@ -1,6 +1,7 @@
 package io.parcelx.open.api.sdk;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.parcelx.jsonrpc.*;
 import okhttp3.Interceptor;
@@ -66,6 +67,7 @@ public class BaseParcelxApi implements JsonRpcInvoker {
 
     private ObjectMapper buildMapper() {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
         mapper.registerModule(new JavaTimeModule());
         return mapper;
     }
