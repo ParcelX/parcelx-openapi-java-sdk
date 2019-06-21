@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
 
-    private static final String REQUEST_TEMPLATE = "{\"jsonrpc\":\"2.0\",\"id\":\"%s\",\"method\":\"%s\",\"params\":\"%s\"}";
+    private static final String REQUEST_TEMPLATE = "{\"jsonrpc\":\"2.0\",\"id\":\"%s\",\"method\":\"%s\",\"params\":%s}";
 
     private final OkHttpClient client;
     private final String url;
