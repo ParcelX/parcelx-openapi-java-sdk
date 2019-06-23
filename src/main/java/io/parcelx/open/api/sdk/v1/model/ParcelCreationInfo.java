@@ -1276,7 +1276,7 @@ public class ParcelCreationInfo {
     }
 
     public void setIsDangerous(Boolean isDangerous) {
-        isDangerous = isDangerous;
+        this.isDangerous = isDangerous;
     }
 
     public Object getVendors() {

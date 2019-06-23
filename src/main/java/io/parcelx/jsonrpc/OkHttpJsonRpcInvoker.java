@@ -58,8 +58,7 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
         try {
             Response resp = call.execute();
             JsonNode jsonResp = mapper.readTree(resp.body().byteStream());
-            ApiResponse response = new ApiResponse(request, jsonResp, mapper);
-            return response;
+            return new ApiResponse(request, jsonResp, mapper);
         } catch (IOException e) {
             throw new ApiInvokeException(e);
         }

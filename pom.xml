@@ -1,14 +1,53 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.parcelx.openapi</groupId>
+    <groupId>io.github.parcelx</groupId>
     <artifactId>parcelx-openapi-sdk</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <name>parcelx-openapi-sdk</name>
+    <description>ParcelX OpenApi client side JAVA SDK.</description>
+    <packaging>jar</packaging>
+    <url>https://github.com/ParcelX/parcelx-openapi-java-sdk</url>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://mit-license.org/</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com/ParcelX/parcelx-openapi-java-sdk.git</connection>
+        <developerConnection>scm:git:git@github.com:ParcelX/parcelx-openapi-java-sdk.git</developerConnection>
+        <url>https://github.com/ParcelX/parcelx-openapi-java-sdk</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>ParcelX Developer</name>
+            <email>developer@parcelx.io</email>
+            <organization>ParcelX</organization>
+            <organizationUrl>https://github.com/ParcelX</organizationUrl>
+            <timezone>UTC+08:00</timezone>
+        </developer>
+    </developers>
+
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -65,102 +104,80 @@
             <version>3.10.0</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>mockwebserver</artifactId>
-            <version>3.10.0</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
+            </url>
+        </repository>
+    </distributionManagement>
+
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-
-            <!--
-                You can run jacoco in the default profile with:
-                mvn jacoco:prepare-agent test jacoco:report
-            -->
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.1</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
 
     <profiles>
-        <!--
-        This profile enables jacoco when unit tests are run.
-        You can run it with mvn -P jacoco test.
-        It also activates itself on Travis.
-        -->
         <profile>
-            <id>jacoco</id>
+            <id>release-sign-artifacts</id>
             <activation>
                 <property>
-                    <name>env.TRAVIS</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>prepare-agent</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>prepare-agent</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>report</id>
-                                <phase>test</phase>
-                                <goals>
-                                    <goal>report</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <!--
-        For the Travis profile:
-        - we want to break the build on any checkstyle violation.
-        - we want to be able to publish coverage report to coveralls.
-        -->
-        <profile>
-            <id>travis</id>
-            <activation>
-                <property>
-                    <name>env.TRAVIS</name>
+                    <name>performRelease</name>
+                    <value>true</value>
                 </property>
             </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.1</version>
                         <executions>
                             <execution>
-                                <id>checkstyle</id>
-                                <phase>test</phase>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
                                 <goals>
-                                    <goal>check</goal>
+                                    <goal>sign</goal>
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.eluder.coveralls</groupId>
-                        <artifactId>coveralls-maven-plugin</artifactId>
-                        <version>4.3.0</version>
                     </plugin>
                 </plugins>
             </build>

@@ -8,12 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-/**
- * @author zhaolu
- * @version 1.0
- * @datetime 6/11/2019 12:17 PM
- * @email zhao.lu@parcelx.io
- */
+
 public class ParcelItem {
     /**
      * 货物编号

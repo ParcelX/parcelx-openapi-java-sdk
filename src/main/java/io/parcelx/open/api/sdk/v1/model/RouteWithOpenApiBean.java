@@ -9,47 +9,75 @@ import java.util.Date;
 /**
  * 用于openApi对接使用，后边可以对其进行扩展
  */
-public class RouteWithOpenApiBean implements Serializable {
-    /** 链路编码 */
+public class RouteWithOpenApiBean {
+    /**
+     * 链路编码
+     */
     @JsonPropertyDescription("链路ID")
     private String routeNo;
-    /** 链路自定义编码 */
+    /**
+     * 链路自定义编码
+     */
     @JsonPropertyDescription("链路自定义编码")
     private String routeCode;
-    /** 链路名称 */
+    /**
+     * 链路名称
+     */
     @JsonPropertyDescription("链路名称，唯一不可重复")
     private String name;
-    /** 链路描述 */
+    /**
+     * 链路描述
+     */
     @JsonPropertyDescription("链路信息描述(备注)")
     private String description;
-    /** 承诺期限 */
+    /**
+     * 承诺期限
+     */
     @JsonPropertyDescription("链路承诺期限，承诺期限 = 结束时间 - 开始时间")
     private BigDecimal commitmentDuration;
-    /** 平均时间 */
+    /**
+     * 平均时间
+     */
     @JsonPropertyDescription("链路运输包裹的平均时间")
     private String averageDuration;
-    /** 开始时间 */
+    /**
+     * 开始时间
+     */
     @JsonPropertyDescription("链路的开始使用时间")
     private Date startDate;
-    /** 结束时间 */
+    /**
+     * 结束时间
+     */
     @JsonPropertyDescription("链路停止使用的时间")
     private Date endDate;
-    /** 链路状态 */
+    /**
+     * 链路状态
+     */
     @JsonPropertyDescription("链路状态: 1 启用、2 停用、3 重新恢复使用")
     private String status;
-    /** 总评分 */
+    /**
+     * 总评分
+     */
     @JsonPropertyDescription("链路评分: 最低分0，最高分100")
     private BigDecimal overallScore;
-    /** 集货仓 */
+    /**
+     * 集货仓
+     */
     @JsonPropertyDescription("链路的集货仓信息")
     private Warehouse warehouse;
-    /** 干线承运 */
+    /**
+     * 干线承运
+     */
     @JsonPropertyDescription("链路的干线承运信息")
     private CrossborderCarrier crossborderCarrier;
-    /** 海关清关 */
+    /**
+     * 海关清关
+     */
     @JsonPropertyDescription("链路的海关清关信息")
     private CustomClearence customClearence;
-    /** 本地配送 */
+    /**
+     * 本地配送
+     */
     @JsonPropertyDescription("链路的本地配送信息")
     private LocalDelivery localDelivery;
 
@@ -165,27 +193,63 @@ public class RouteWithOpenApiBean implements Serializable {
         this.localDelivery = localDelivery;
     }
 
-    /** 集货仓 */
+    @Override
+    public String toString() {
+        return "RouteWithOpenApiBean{" +
+                "routeNo='" + routeNo + '\'' +
+                ", routeCode='" + routeCode + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", commitmentDuration=" + commitmentDuration +
+                ", averageDuration='" + averageDuration + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", status='" + status + '\'' +
+                ", overallScore=" + overallScore +
+                ", warehouse=" + warehouse +
+                ", crossborderCarrier=" + crossborderCarrier +
+                ", customClearence=" + customClearence +
+                ", localDelivery=" + localDelivery +
+                '}';
+    }
+
+    /**
+     * 集货仓
+     */
     public static class Warehouse {
-        /** 服务id */
+        /**
+         * 服务id
+         */
         @JsonPropertyDescription("集货仓ID")
         private String serviceNo;
-        /** 服务自定义编码 */
+        /**
+         * 服务自定义编码
+         */
         @JsonPropertyDescription("集货仓服务商自定义编码")
         private String serviceCode;
-        /** 服务名称 */
+        /**
+         * 服务名称
+         */
         @JsonPropertyDescription("集货仓名称")
         private String serviceName;
-        /** 服务国际描述名称 */
+        /**
+         * 服务国际描述名称
+         */
         @JsonPropertyDescription("集货仓本地化语言名称")
         private String serviceGlobalName;
-        /** 账户编号 */
+        /**
+         * 账户编号
+         */
         @JsonPropertyDescription("集货仓服务提供商的账户编号")
         private String accountNo;
-        /** 账户名称 */
+        /**
+         * 账户名称
+         */
         @JsonPropertyDescription("集货仓服务提供商的账户名称")
         private String accountName;
-        /** 服务地址 */
+        /**
+         * 服务地址
+         */
         @JsonPropertyDescription("集货仓的服务地址，格式: 国家-一级行政区-二级行政区-详细地址")
         private String serviceAddress;
 
@@ -246,36 +310,58 @@ public class RouteWithOpenApiBean implements Serializable {
         }
     }
 
-    /** 干线承运 */
+    /**
+     * 干线承运
+     */
     public static class CrossborderCarrier {
-        /** 服务id */
+        /**
+         * 服务id
+         */
         @JsonPropertyDescription("干线承运ID")
         private String serviceNo;
-        /** 服务自定义编码 */
+        /**
+         * 服务自定义编码
+         */
         @JsonPropertyDescription("干线承运服务商自定义编码")
         private String serviceCode;
-        /** 服务名称 */
+        /**
+         * 服务名称
+         */
         @JsonPropertyDescription("干线承运服务名称")
         private String serviceName;
-        /** 服务国际化名称 */
+        /**
+         * 服务国际化名称
+         */
         @JsonPropertyDescription("干线承运本地化语言名称")
         private String serviceGlobalName;
-        /** 账户编号 */
+        /**
+         * 账户编号
+         */
         @JsonPropertyDescription("干线承运服务提供商的账户编号")
         private String accountNo;
-        /** 账户名称 */
+        /**
+         * 账户名称
+         */
         @JsonPropertyDescription("干线承运服务提供商的账户名称")
         private String accountName;
-        /** 装货港服务地址 */
+        /**
+         * 装货港服务地址
+         */
         @JsonPropertyDescription("干线承运服务装货港的服务地址，格式: 国家-一级行政区-二级行政区-详细地址")
         private String dischargeServiceAddress;
-        /** 卸货港港服务地址 */
+        /**
+         * 卸货港港服务地址
+         */
         @JsonPropertyDescription("干线承运服务卸货港的服务地址，格式: 国家-一级行政区-二级行政区-详细地址")
         private String loadingServiceAddress;
-        /** 运输类型 */
+        /**
+         * 运输类型
+         */
         @JsonPropertyDescription("干线承运服务的运输类型: air 空中运输、sea 航空运输、land 陆地运输")
         private String carrierType;
-        /** 运输类型国际化描述 */
+        /**
+         * 运输类型国际化描述
+         */
         @JsonPropertyDescription("干线承运服务的运输类型本地化语言描述")
         private String carrierTypeDesc;
 
@@ -360,33 +446,53 @@ public class RouteWithOpenApiBean implements Serializable {
         }
     }
 
-    /** 海关清关 */
+    /**
+     * 海关清关
+     */
     public static class CustomClearence {
-        /** 服务id */
+        /**
+         * 服务id
+         */
         @JsonPropertyDescription("海关清关ID")
         private String serviceNo;
-        /** 服务自定义编码 */
+        /**
+         * 服务自定义编码
+         */
         @JsonPropertyDescription("海关清关服务商自定义编码")
         private String serviceCode;
-        /** 服务名称 */
+        /**
+         * 服务名称
+         */
         @JsonPropertyDescription("海关清关服务名称")
         private String serviceName;
-        /** 服务国际化名称 */
+        /**
+         * 服务国际化名称
+         */
         @JsonPropertyDescription("海关清关本地化语言名称")
         private String serviceGlobalName;
-        /** 账户编号 */
+        /**
+         * 账户编号
+         */
         @JsonPropertyDescription("海关清关服务提供商的账户编号")
         private String accountNo;
-        /** 账户名称 */
+        /**
+         * 账户名称
+         */
         @JsonPropertyDescription("海关清关服务提供商的账户名称")
         private String accountName;
-        /** 服务地址 */
+        /**
+         * 服务地址
+         */
         @JsonPropertyDescription("海关清关的服务地址，格式: 国家-一级行政区-二级行政区-详细地址")
         private String serviceAddress;
-        /** 清关类型 */
+        /**
+         * 清关类型
+         */
         @JsonPropertyDescription("海关清关的清关类型: BC 直邮清关、 CC 行邮清关、DDU、 DDP")
         private String clearanceType;
-        /** 清关类型国际化描述 */
+        /**
+         * 清关类型国际化描述
+         */
         @JsonPropertyDescription("海关清关的清关类型本地化描述")
         private String clearanceTypeDesc;
 
@@ -463,27 +569,43 @@ public class RouteWithOpenApiBean implements Serializable {
         }
     }
 
-    /** 本地配送 */
+    /**
+     * 本地配送
+     */
     public static class LocalDelivery {
-        /** 服务id */
+        /**
+         * 服务id
+         */
         @JsonPropertyDescription("本地配送ID")
         private String serviceNo;
-        /** 服务自定义编码 */
+        /**
+         * 服务自定义编码
+         */
         @JsonPropertyDescription("本地配送服务商自定义编码")
         private String serviceCode;
-        /** 服务名称 */
+        /**
+         * 服务名称
+         */
         @JsonPropertyDescription("本地配送服务名称")
         private String serviceName;
-        /** 服务国际化名称 */
+        /**
+         * 服务国际化名称
+         */
         @JsonPropertyDescription("本地配送本地化语言名称")
         private String serviceGlobalName;
-        /** 账户编号 */
+        /**
+         * 账户编号
+         */
         @JsonPropertyDescription("本地配送服务提供商的账户编号")
         private String accountNo;
-        /** 账户名称 */
+        /**
+         * 账户名称
+         */
         @JsonPropertyDescription("本地配送服务提供商的账户名称")
         private String accountName;
-        /** 服务地址 */
+        /**
+         * 服务地址
+         */
         @JsonPropertyDescription("本地配送的服务地址，格式: 国家-一级行政区-二级行政区-详细地址")
         private String serviceAddress;
 
@@ -542,25 +664,5 @@ public class RouteWithOpenApiBean implements Serializable {
         public void setServiceAddress(String serviceAddress) {
             this.serviceAddress = serviceAddress;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "RouteWithOpenApiBean{" +
-                "routeNo='" + routeNo + '\'' +
-                ", routeCode='" + routeCode + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", commitmentDuration=" + commitmentDuration +
-                ", averageDuration='" + averageDuration + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", status='" + status + '\'' +
-                ", overallScore=" + overallScore +
-                ", warehouse=" + warehouse +
-                ", crossborderCarrier=" + crossborderCarrier +
-                ", customClearence=" + customClearence +
-                ", localDelivery=" + localDelivery +
-                '}';
     }
 }

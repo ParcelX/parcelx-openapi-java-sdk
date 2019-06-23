@@ -26,7 +26,7 @@ public enum ParcelExceptionCode {
     @JsonCreator
     public static ParcelExceptionCode fromValue(String code) {
         for (ParcelExceptionCode value : ParcelExceptionCode.values()) {
-            if (value.code == code) {
+            if (value.code.equals(code)) {
                 return value;
             }
         }
