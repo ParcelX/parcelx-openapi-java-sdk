@@ -23,12 +23,12 @@ public class ProviderApi extends BaseParcelxApi implements IProviderApi {
 
     @Override
     public ParcelInfoResult getParcelInfo(ParcelNoParam parcelNo) throws ApiException {
-        return invoke(new ApiRequest("queryParcelList", parcelNo)).getResult(ParcelInfoResult.class);
+        return invoke(new ApiRequest("getParcelInfo", parcelNo)).getResult(ParcelInfoResult.class);
     }
 
     @Override
     public void reportTrackingNumber(ParcelNoParam parcelNo, String trackingNo) throws ApiException {
-        invoke(new ApiRequest("queryParcelList", parcelNo, trackingNo)).throwExceptionIfHasError();
+        invoke(new ApiRequest("reportTrackingNumber", parcelNo, trackingNo)).throwExceptionIfHasError();
     }
 
     @Override
