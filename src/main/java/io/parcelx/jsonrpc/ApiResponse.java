@@ -15,8 +15,11 @@ public class ApiResponse {
     public ApiResponse(ApiRequest request, JsonNode response, ObjectMapper mapper) throws ApiException {
         this.request = request;
         this.mapper = mapper;
+        if (response == null) {
+            throw new ApiException(-1, "empty response");
+        }
         this.id = response.get("id").asText();
-        if(this.id == null){
+        if (this.id == null) {
             throw new ApiException(-1, null);
         }
         this.jsonResult = response.get("result");

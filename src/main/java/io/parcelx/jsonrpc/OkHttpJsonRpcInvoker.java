@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.*;
 
@@ -24,7 +23,6 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
     private final OkHttpClient client;
     private final String url;
     private final ObjectMapper mapper;
-    private final JsonNodeFactory jsonNodeFactory;
 
     public OkHttpJsonRpcInvoker(String url) {
         this(url, null, null);
@@ -38,7 +36,6 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
         this.url = url;
         this.mapper = mapper;
         this.client = client == null ? getDefaultClient() : client;
-        this.jsonNodeFactory = JsonNodeFactory.withExactBigDecimals(false);
 
         this.mapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
         this.mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
@@ -57,7 +54,10 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
         Call call = this.client.newCall(new Request.Builder().url(url).post(requestBody).build());
         try {
             Response resp = call.execute();
-            JsonNode jsonResp = mapper.readTree(resp.body().byteStream());
+            JsonNode jsonResp = null;
+            if (resp.body() != null) {
+                jsonResp = mapper.readTree(resp.body().byteStream());
+            }
             return new ApiResponse(request, jsonResp, mapper);
         } catch (IOException e) {
             throw new ApiInvokeException(e);
