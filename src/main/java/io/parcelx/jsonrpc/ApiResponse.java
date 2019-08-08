@@ -23,7 +23,7 @@ public class ApiResponse {
             throw new ApiException(-1, null);
         }
         this.jsonResult = response.get("result");
-        this.error = this.parseError(response.get("error'"));
+        this.error = this.parseError(response.get("error"));
     }
 
     public <T> T getResult(Class<T> resultType) throws ApiInvokeException {
@@ -38,12 +38,12 @@ public class ApiResponse {
     }
 
     private Error parseError(JsonNode jsonError) {
-        if (jsonError == null) {
+        if (jsonError == null || jsonError.isNull()) {
             return null;
         }
         Error error = new Error();
-        error.code = jsonError.get("code").asInt();
-        error.message = jsonError.get("message").asText();
+        error.code = jsonError.get("code") != null ? jsonError.get("code").asInt() : -1;
+        error.message = jsonError.get("message") != null ? jsonError.get("message").asText() : null;
         error.data = jsonError.get("data");
         return error;
     }
