@@ -1,9 +1,9 @@
 package io.parcelx.jsonrpc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ApiBatchResponse {
 
@@ -14,7 +14,12 @@ public class ApiBatchResponse {
 
     public ApiBatchResponse(List<ApiResponse> responses) {
         this.responses = responses;
-        this.responseMap = responses.stream().collect(Collectors.toMap(ApiResponse::getId, s -> s));
+        Map<String, ApiResponse> map = new HashMap<String, ApiResponse>();
+        for (ApiResponse respons : responses) {
+            map.put(respons.getId(),respons);
+        }
+        this.responseMap = map;
+        //this.responseMap = responses.stream().collect(Collectors.toMap(ApiResponse::getId, s -> s));
     }
 
     public ApiResponse getApiResponse(int index) {
@@ -35,7 +40,12 @@ public class ApiBatchResponse {
 
     private List<ApiResponse> ensureErrors() {
         if (errors == null) {
-            errors = responses.stream().filter(ApiResponse::hasError).collect(Collectors.toList());
+            for (ApiResponse respons : responses) {
+                if(respons.hasError()){
+                    errors.add(respons);
+                }
+            }
+            //errors = responses.stream().filter(ApiResponse::hasError).collect(Collectors.toList());
         }
         return errors;
     }
@@ -44,7 +54,7 @@ public class ApiBatchResponse {
         if (this.hasError()) {
             throw new BatchApiException(this.errors);
         }
-        List<T> list = new ArrayList<>();
+        List<T> list = new ArrayList<T>();
         for (ApiResponse resp : responses) {
             list.add(resp.getResult(returnType));
         }
@@ -62,7 +72,12 @@ public class ApiBatchResponse {
 
     private List<ApiResponse> ensureCorrect() {
         if (correctResponses == null) {
-            correctResponses = responses.stream().filter(r -> !r.hasError()).collect(Collectors.toList());
+            for (ApiResponse respons : responses) {
+                if(!respons.hasError()){
+                    correctResponses.add(respons);
+                }
+            }
+            //correctResponses = responses.stream().filter(r -> !r.hasError()).collect(Collectors.toList());
         }
         return correctResponses;
     }

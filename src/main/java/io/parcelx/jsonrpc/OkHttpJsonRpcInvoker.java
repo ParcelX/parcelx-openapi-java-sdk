@@ -9,12 +9,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
 
@@ -46,11 +42,11 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
     }
 
     @Override
-    public ApiResponse invoke(ApiRequest request) throws ApiException {
+    public ApiResponse invoke(ApiRequest request) throws ApiException, UnsupportedEncodingException {
         String payload = getRequestPayload(request);
         RequestBody requestBody = RequestBody.create(
                 MediaType.parse("application/json"),
-                payload.getBytes(StandardCharsets.UTF_8));
+                payload.getBytes("UTF-8"));
         Call call = this.client.newCall(new Request.Builder().url(url).post(requestBody).build());
         try {
             Response resp = call.execute();
@@ -73,7 +69,7 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
     }
 
     @Override
-    public ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException {
+    public ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException, UnsupportedEncodingException {
         StringBuilder sb = new StringBuilder(requests.size() * 50);
         sb.append("[");
         int count = 0;
@@ -88,9 +84,15 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
         String payload = sb.toString();
         RequestBody requestBody = RequestBody.create(
                 MediaType.parse("application/json"),
-                payload.getBytes(StandardCharsets.UTF_8));
+                payload.getBytes("UTF-8"));
         Call call = this.client.newCall(new Request.Builder().url(url).post(requestBody).build());
-        Map<String, ApiRequest> requestMap = requests.stream().collect(Collectors.toMap(ApiRequest::getId, s -> s));
+        for (ApiRequest request : requests) {
+
+        }
+        Map<String, ApiRequest> requestMap = new HashMap<String, ApiRequest>();
+        for (ApiRequest request : requests) {
+            requestMap.put(request.getId(),request);
+        }
         try {
             Response resp = call.execute();
             JsonNode jsonResp = mapper.readTree(resp.body().byteStream());
@@ -106,7 +108,7 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
         //TODO: more parsing error logic
         ArrayNode responses = (ArrayNode) jsonResp;
         int size = responses.size();
-        List<ApiResponse> apiResponseList = new ArrayList<>(size);
+        List<ApiResponse> apiResponseList = new ArrayList<ApiResponse>(size);
         for (int i = 0; i < size; i++) {
             ObjectNode node = (ObjectNode) responses.get(i);
             ApiRequest request = requestMap.get(node.get("id"));
@@ -116,7 +118,11 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
     }
 
     @Override
-    public ApiBatchResponse batch(ApiRequest... requests) throws ApiException {
-        return this.batch(Arrays.stream(requests).collect(Collectors.toList()));
+    public ApiBatchResponse batch(ApiRequest... requests) throws ApiException, UnsupportedEncodingException {
+        List<ApiRequest> apiRequestList = new ArrayList<ApiRequest>();
+        for (ApiRequest request : requests) {
+            apiRequestList.add(request);
+        }
+        return this.batch(apiRequestList);
     }
 }

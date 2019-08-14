@@ -5,6 +5,8 @@ import io.parcelx.jsonrpc.ApiRequest;
 import io.parcelx.open.api.sdk.BaseParcelxApi;
 import io.parcelx.open.api.sdk.v1.model.*;
 
+import java.io.UnsupportedEncodingException;
+
 public class ProviderApi extends BaseParcelxApi implements IProviderApi {
 
     public ProviderApi(String url, String apiKey, String apiSecret) {
@@ -12,57 +14,57 @@ public class ProviderApi extends BaseParcelxApi implements IProviderApi {
     }
 
     @Override
-    public ParcelRouteResult getRoute(String routeCode) throws ApiException {
+    public ParcelRouteResult getRoute(String routeCode) throws ApiException, UnsupportedEncodingException {
         return invoke(new ApiRequest("getRoute", routeCode)).getResult(ParcelRouteResult.class);
     }
 
     @Override
-    public ParcelListQueryResult queryParcelList(ParcelListQueryParam query) throws ApiException {
+    public ParcelListQueryResult queryParcelList(ParcelListQueryParam query) throws ApiException, UnsupportedEncodingException {
         return invoke(new ApiRequest("queryParcelList", query)).getResult(ParcelListQueryResult.class);
     }
 
     @Override
-    public ParcelInfoResult getParcelInfo(ParcelNoParam parcelNo) throws ApiException {
+    public ParcelInfoResult getParcelInfo(ParcelNoParam parcelNo) throws ApiException, UnsupportedEncodingException {
         return invoke(new ApiRequest("getParcelInfo", parcelNo)).getResult(ParcelInfoResult.class);
     }
 
     @Override
-    public void reportTrackingNumber(ParcelNoParam parcelNo, String trackingNo) throws ApiException {
+    public void reportTrackingNumber(ParcelNoParam parcelNo, String trackingNo) throws ApiException, UnsupportedEncodingException {
         invoke(new ApiRequest("reportTrackingNumber", parcelNo, trackingNo)).throwExceptionIfHasError();
     }
 
     @Override
-    public ParcelLabelResult getLabel(ParcelNoParam parcelNo) throws ApiException {
+    public ParcelLabelResult getLabel(ParcelNoParam parcelNo) throws ApiException, UnsupportedEncodingException {
         return invoke(new ApiRequest("getLabel", parcelNo)).getResult(ParcelLabelResult.class);
     }
 
     @Override
-    public void reportLabel(ParcelNoParam parcelNo, ParcelLabelParam label) throws ApiException {
+    public void reportLabel(ParcelNoParam parcelNo, ParcelLabelParam label) throws ApiException, UnsupportedEncodingException {
         invoke(new ApiRequest("reportLabel", parcelNo, label)).throwExceptionIfHasError();
     }
 
     @Override
-    public void reportWeight(ParcelNoParam parcelNo, double weight) throws ApiException {
+    public void reportWeight(ParcelNoParam parcelNo, double weight) throws ApiException, UnsupportedEncodingException {
         invoke(new ApiRequest("reportWeight", parcelNo, weight)).throwExceptionIfHasError();
     }
 
     @Override
-    public void reportLading(ParcelNoParam parcelNo, ParcelLadingParam lading) throws ApiException {
+    public void reportLading(ParcelNoParam parcelNo, ParcelLadingParam lading) throws ApiException, UnsupportedEncodingException {
         invoke(new ApiRequest("reportLading", parcelNo, lading)).throwExceptionIfHasError();
     }
 
     @Override
-    public void reportTrackingEvent(ParcelNoParam parcelNo, TrackingEventParam trackingEvent) throws ApiException {
+    public void reportTrackingEvent(ParcelNoParam parcelNo, TrackingEventParam trackingEvent) throws ApiException, UnsupportedEncodingException {
         invoke(new ApiRequest("reportTrackingEvent", parcelNo, trackingEvent)).throwExceptionIfHasError();
     }
 
     @Override
-    public void reportServiceComplete(ParcelNoParam parcelNo, ServiceCompleteInfoParam completeInfo) throws ApiException {
+    public void reportServiceComplete(ParcelNoParam parcelNo, ServiceCompleteInfoParam completeInfo) throws ApiException, UnsupportedEncodingException {
         invoke(new ApiRequest("reportServiceComplete", parcelNo, completeInfo)).throwExceptionIfHasError();
     }
 
     @Override
-    public void reportException(ParcelNoParam parcelNo, ParcelExceptionParam exception) throws ApiException {
+    public void reportException(ParcelNoParam parcelNo, ParcelExceptionParam exception) throws ApiException, UnsupportedEncodingException {
         invoke(new ApiRequest("reportException", parcelNo, exception)).throwExceptionIfHasError();
     }
 }

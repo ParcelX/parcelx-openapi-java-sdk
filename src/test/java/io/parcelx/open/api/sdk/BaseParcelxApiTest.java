@@ -15,9 +15,9 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -48,11 +48,12 @@ public class BaseParcelxApiTest {
     private <T> MockResponse buildSuccessJsonRpcBatchMockResponse(List<ApiRequest> requests, List<T> results) {
         MockResponse mockResponse = new MockResponse();
         mockResponse.addHeader("Content-Type", "application/json");
-        List<JsonRpcResponse> responseList = results.stream().map(r -> {
+        List<JsonRpcResponse> responseList = new ArrayList<JsonRpcResponse>();
+        for (T result : results) {
             JsonRpcResponse jsonRpcResponse = new JsonRpcResponse();
-            jsonRpcResponse.result = r;
-            return jsonRpcResponse;
-        }).collect(Collectors.toList());
+            jsonRpcResponse.result = result;
+            responseList.add(jsonRpcResponse);
+        }
         for (int i = 0; i < requests.size(); i++) {
             responseList.get(i).id = requests.get(i).getId();
         }
@@ -94,7 +95,7 @@ public class BaseParcelxApiTest {
         String routeCode = "routeCode";
 
         List<String> routeCodes = Arrays.asList("route1", "route2", "route3", "route4");
-        List<ApiRequest> requests = routeCodes.stream()
+        /*List<ApiRequest> requests = routeCodes.stream()
                 .map(s -> new ApiRequest("getRoute", s))
                 .collect(Collectors.toList());
         List<ParcelRouteResult> expectResult = routeCodes.stream()
@@ -102,8 +103,18 @@ public class BaseParcelxApiTest {
                     ParcelRouteResult r = new ParcelRouteResult();
                     r.setRouteCode(s);
                     return r;
-                }).collect(Collectors.toList());
-
+                }).collect(Collectors.toList());*/
+        List<ApiRequest> requests = new ArrayList<ApiRequest>();
+        for (String code : routeCodes) {
+            ApiRequest apiRequest = new ApiRequest("getRoute", code);
+            requests.add(apiRequest);
+        }
+        List<ParcelRouteResult> expectResult = new ArrayList<ParcelRouteResult>();
+        for (String code : routeCodes) {
+            ParcelRouteResult parcelRouteResult = new ParcelRouteResult();
+            parcelRouteResult.setRouteCode(code);
+            expectResult.add(parcelRouteResult);
+        }
         MockWebServer server = new MockWebServer();
         server.enqueue(this.buildSuccessJsonRpcBatchMockResponse(requests, expectResult));
         server.start();

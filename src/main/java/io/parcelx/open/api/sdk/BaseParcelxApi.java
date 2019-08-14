@@ -13,7 +13,7 @@ import okio.Buffer;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -74,17 +74,17 @@ public class BaseParcelxApi implements JsonRpcInvoker {
     }
 
     @Override
-    public ApiResponse invoke(ApiRequest request) throws ApiException {
+    public ApiResponse invoke(ApiRequest request) throws ApiException, UnsupportedEncodingException {
         return this.invoker.invoke(request);
     }
 
     @Override
-    public ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException {
+    public ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException, UnsupportedEncodingException {
         return this.invoker.batch(requests);
     }
 
     @Override
-    public ApiBatchResponse batch(ApiRequest... requests) throws ApiException {
+    public ApiBatchResponse batch(ApiRequest... requests) throws ApiException, UnsupportedEncodingException {
         return this.invoker.batch(requests);
     }
 
@@ -93,7 +93,7 @@ public class BaseParcelxApi implements JsonRpcInvoker {
         private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
         private static Random random = new Random();
 
-        private static String sign(String apiKey, String timestamp, String nonce, String body, String apiSecret) {
+        private static String sign(String apiKey, String timestamp, String nonce, String body, String apiSecret) throws UnsupportedEncodingException {
             if (apiKey == null) {
                 apiKey = "";
             }
@@ -109,8 +109,8 @@ public class BaseParcelxApi implements JsonRpcInvoker {
             if (apiSecret == null) {
                 apiSecret = "";
             }
-            byte[] data = String.format("%s%s%s%s", apiKey, timestamp, nonce, body).getBytes(StandardCharsets.UTF_8);
-            return toHmacSHA256(data, apiSecret.getBytes(StandardCharsets.UTF_8));
+            byte[] data = String.format("%s%s%s%s", apiKey, timestamp, nonce, body).getBytes("UTF-8");
+            return toHmacSHA256(data, apiSecret.getBytes("UTF-8"));
         }
 
         private static String toHmacSHA256(byte[] data, byte[] key) {
@@ -120,7 +120,9 @@ public class BaseParcelxApi implements JsonRpcInvoker {
                 Mac mac = Mac.getInstance("HmacSHA256");
                 mac.init(signingKey);
                 output = bytesToHexString(mac.doFinal(data));
-            } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+            } catch (NoSuchAlgorithmException e) {
+                // 此处忽略异常
+            } catch (InvalidKeyException e){
                 // 此处忽略异常
             }
             return output;
@@ -136,7 +138,7 @@ public class BaseParcelxApi implements JsonRpcInvoker {
             return new String(hexChars);
         }
 
-        public static String makeGPXHMAC256ApiKey(String body, String apiKey, String apiSecret) {
+        public static String makeGPXHMAC256ApiKey(String body, String apiKey, String apiSecret) throws UnsupportedEncodingException {
             String timestamp = String.format("%s", System.currentTimeMillis());
             String nonce = String.format("%s", random.nextInt(1000000) + 100000);
             String sign = sign(apiKey, timestamp, nonce, body, apiSecret);
