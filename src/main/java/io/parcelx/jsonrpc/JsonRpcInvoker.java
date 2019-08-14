@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface JsonRpcInvoker {
 
-    ApiResponse invoke(ApiRequest request) throws ApiException, UnsupportedEncodingException;
+    ApiResponse invoke(ApiRequest request) throws ApiException;
 
-    ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException, UnsupportedEncodingException;
+    ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException;
 
-    ApiBatchResponse batch(ApiRequest... requests) throws ApiException, UnsupportedEncodingException;
+    ApiBatchResponse batch(ApiRequest... requests) throws ApiException;
 }

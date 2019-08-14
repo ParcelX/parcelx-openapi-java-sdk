@@ -83,7 +83,7 @@ public class BaseParcelxApiTest {
 
         HttpUrl apiUrl = server.url("/openapi/v1/provider/jsonrpc");
         ProviderApi providerApi = new ProviderApi(apiUrl.toString(), apiKey, apiSecret);
-        ApiResponse resp = providerApi.invoke(new ApiRequest("getRoute", routeCode));
+        ApiResponse resp = providerApi.invoke(new ApiRequest("reportTrackingEvent", routeCode));
         ParcelRouteResult actualResult = resp.getResult(ParcelRouteResult.class);
         assertEquals(expected.getRouteCode(), actualResult.getRouteCode());
     }

@@ -74,17 +74,17 @@ public class BaseParcelxApi implements JsonRpcInvoker {
     }
 
     @Override
-    public ApiResponse invoke(ApiRequest request) throws ApiException, UnsupportedEncodingException {
+    public ApiResponse invoke(ApiRequest request) throws ApiException {
         return this.invoker.invoke(request);
     }
 
     @Override
-    public ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException, UnsupportedEncodingException {
+    public ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException {
         return this.invoker.batch(requests);
     }
 
     @Override
-    public ApiBatchResponse batch(ApiRequest... requests) throws ApiException, UnsupportedEncodingException {
+    public ApiBatchResponse batch(ApiRequest... requests) throws ApiException {
         return this.invoker.batch(requests);
     }
 
@@ -93,7 +93,7 @@ public class BaseParcelxApi implements JsonRpcInvoker {
         private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
         private static Random random = new Random();
 
-        private static String sign(String apiKey, String timestamp, String nonce, String body, String apiSecret) throws UnsupportedEncodingException {
+        private static String sign(String apiKey, String timestamp, String nonce, String body, String apiSecret) {
             if (apiKey == null) {
                 apiKey = "";
             }
@@ -109,8 +109,16 @@ public class BaseParcelxApi implements JsonRpcInvoker {
             if (apiSecret == null) {
                 apiSecret = "";
             }
-            byte[] data = String.format("%s%s%s%s", apiKey, timestamp, nonce, body).getBytes("UTF-8");
-            return toHmacSHA256(data, apiSecret.getBytes("UTF-8"));
+            byte[] data = new byte[0];
+            String toHmacSHA256 = null;
+            try {
+                data = String.format("%s%s%s%s", apiKey, timestamp, nonce, body).getBytes("UTF-8");
+                toHmacSHA256 = toHmacSHA256(data, apiSecret.getBytes("UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                // 修改charset异常，不做处理
+                e.printStackTrace();
+            }
+            return toHmacSHA256;
         }
 
         private static String toHmacSHA256(byte[] data, byte[] key) {

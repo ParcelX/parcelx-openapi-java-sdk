@@ -8,20 +8,20 @@ import java.io.UnsupportedEncodingException;
 
 public interface IECommerceApi extends JsonRpcInvoker {
 
-    ParcelCreationResult createParcel(CreateParcelParam parcel, boolean autoPlaceOrder) throws ApiException, UnsupportedEncodingException;
+    ParcelCreationResult createParcel(CreateParcelParam parcel, boolean autoPlaceOrder) throws ApiException;
 
-    void placeOrder(ParcelNoParam parcelNo) throws ApiException, UnsupportedEncodingException;
+    void placeOrder(ParcelNoParam parcelNo) throws ApiException;
 
-    ParcelListQueryResult getParcelList(ParcelListQueryParam query) throws ApiException, UnsupportedEncodingException;
+    ParcelListQueryResult getParcelList(ParcelListQueryParam query) throws ApiException;
 
-    ParcelInfoResult getParcelInfo(ParcelNoParam parcelNo) throws ApiException, UnsupportedEncodingException;
+    ParcelInfoResult getParcelInfo(ParcelNoParam parcelNo) throws ApiException;
 
-    ParcelLabelResult getLabel(ParcelNoParam parcelNo) throws ApiException, UnsupportedEncodingException;
+    ParcelLabelResult getLabel(ParcelNoParam parcelNo) throws ApiException;
 
-    ParcelTrackingResult getTracking(ParcelNoParam parcelNo) throws ApiException, UnsupportedEncodingException;
+    ParcelTrackingResult getTracking(ParcelNoParam parcelNo) throws ApiException;
 
-    void fixException(ParcelNoParam parcelNo, FixParcelInfoParam fixParcelInfoParam) throws ApiException, UnsupportedEncodingException;
+    void fixException(ParcelNoParam parcelNo, FixParcelInfoParam fixParcelInfoParam) throws ApiException;
 
-    void confirmServiceComplete(ParcelNoParam parcelNo) throws ApiException, UnsupportedEncodingException;
+    void confirmServiceComplete(ParcelNoParam parcelNo) throws ApiException;
 
 }

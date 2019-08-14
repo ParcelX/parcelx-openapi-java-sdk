@@ -42,11 +42,17 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
     }
 
     @Override
-    public ApiResponse invoke(ApiRequest request) throws ApiException, UnsupportedEncodingException {
+    public ApiResponse invoke(ApiRequest request) throws ApiException {
         String payload = getRequestPayload(request);
-        RequestBody requestBody = RequestBody.create(
-                MediaType.parse("application/json"),
-                payload.getBytes("UTF-8"));
+        RequestBody requestBody = null;
+        try {
+            requestBody = RequestBody.create(
+                    MediaType.parse("application/json"),
+                    payload.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            // 修改charset异常，不做处理
+            e.printStackTrace();
+        }
         Call call = this.client.newCall(new Request.Builder().url(url).post(requestBody).build());
         try {
             Response resp = call.execute();
@@ -69,7 +75,7 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
     }
 
     @Override
-    public ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException, UnsupportedEncodingException {
+    public ApiBatchResponse batch(List<ApiRequest> requests) throws ApiException {
         StringBuilder sb = new StringBuilder(requests.size() * 50);
         sb.append("[");
         int count = 0;
@@ -82,9 +88,15 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
         }
         sb.append("]");
         String payload = sb.toString();
-        RequestBody requestBody = RequestBody.create(
-                MediaType.parse("application/json"),
-                payload.getBytes("UTF-8"));
+        RequestBody requestBody = null;
+        try {
+            requestBody = RequestBody.create(
+                    MediaType.parse("application/json"),
+                    payload.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            // 修改charset异常，不做处理
+            e.printStackTrace();
+        }
         Call call = this.client.newCall(new Request.Builder().url(url).post(requestBody).build());
         for (ApiRequest request : requests) {
 
@@ -118,7 +130,7 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
     }
 
     @Override
-    public ApiBatchResponse batch(ApiRequest... requests) throws ApiException, UnsupportedEncodingException {
+    public ApiBatchResponse batch(ApiRequest... requests) throws ApiException {
         List<ApiRequest> apiRequestList = new ArrayList<ApiRequest>();
         for (ApiRequest request : requests) {
             apiRequestList.add(request);
