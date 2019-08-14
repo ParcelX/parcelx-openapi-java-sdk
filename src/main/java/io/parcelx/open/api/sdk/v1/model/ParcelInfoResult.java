@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.util.Date;
+
 
 public class ParcelInfoResult extends ParcelCreationInfo {
 
@@ -43,7 +44,7 @@ public class ParcelInfoResult extends ParcelCreationInfo {
      */
     @JsonPropertyDescription("包裹服务完成时间(包裹收件时间)")
     @JsonProperty("serviceCompleteTime")
-    private Instant receiveTime;
+    private Date receiveTime;
 
     /**
      * 包裹运费
@@ -102,11 +103,11 @@ public class ParcelInfoResult extends ParcelCreationInfo {
         this.billOfLadingNo = billOfLadingNo;
     }
 
-    public Instant getReceiveTime() {
+    public Date getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(Instant receiveTime) {
+    public void setReceiveTime(Date receiveTime) {
         this.receiveTime = receiveTime;
     }
 

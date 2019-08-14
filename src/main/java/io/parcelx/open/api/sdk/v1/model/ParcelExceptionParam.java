@@ -2,29 +2,21 @@ package io.parcelx.open.api.sdk.v1.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.time.Instant;
+import java.util.Date;
 
 public class ParcelExceptionParam {
 
     @JsonPropertyDescription("异常编码,不能为空[UNKNOWN:未知错误; PLACE_ORDER_ERROR:下单错误;]")
-    @NotNull
     private ParcelExceptionCode code;
 
     @JsonPropertyDescription("异常消息,不能为空")
-    @NotNull
-    @NotBlank
-    @Size(max = 100)
     private String message;
 
     @JsonPropertyDescription("异常事件")
     //@NotNull
-    private Instant time;
+    private Date time;
 
     @JsonPropertyDescription("位置信息")
-    @Size(max = 100)
     private String location;
 
     public String getMessage() {
@@ -36,11 +28,11 @@ public class ParcelExceptionParam {
         return this;
     }
 
-    public Instant getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public ParcelExceptionParam setTime(Instant time) {
+    public ParcelExceptionParam setTime(Date time) {
         this.time = time;
         return this;
     }

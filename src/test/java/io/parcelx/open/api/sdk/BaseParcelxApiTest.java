@@ -3,7 +3,6 @@ package io.parcelx.open.api.sdk;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.parcelx.jsonrpc.ApiException;
 import io.parcelx.jsonrpc.ApiRequest;
 import io.parcelx.jsonrpc.ApiResponse;
@@ -27,7 +26,6 @@ public class BaseParcelxApiTest {
 
     public BaseParcelxApiTest() throws IOException {
         this.mapper = new ObjectMapper();
-        this.mapper.registerModule(new JavaTimeModule());
         this.mapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
     }
 

@@ -2,25 +2,18 @@ package io.parcelx.open.api.sdk.v1.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.time.Instant;
+import java.util.Date;
+
 
 public class ServiceCompleteInfoParam {
 
     @JsonPropertyDescription("上报完成附加消息，不可为空")
-    @NotNull
-    @NotBlank
-    @Size(max = 100)
     private String message;
 
     @JsonPropertyDescription("上报完成时间，不可为空")
-    @NotNull
-    private Instant time;
+    private Date time;
 
     @JsonPropertyDescription("上报完成时的位置")
-    @Size(max = 100)
     private String location;
 
     public String getMessage() {
@@ -32,11 +25,11 @@ public class ServiceCompleteInfoParam {
         return this;
     }
 
-    public Instant getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public ServiceCompleteInfoParam setTime(Instant time) {
+    public ServiceCompleteInfoParam setTime(Date time) {
         this.time = time;
         return this;
     }

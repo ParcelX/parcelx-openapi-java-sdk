@@ -1,30 +1,15 @@
 package io.parcelx.open.api.sdk.v1.model;
 
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-
 
 public class ParcelItem {
     /**
      * 货物编号
      */
-    @JsonPropertyDescription("货物编号")
-    @NotBlank
-    @Size(max = 100)
-    @NotNull
     private String itemNo;
     /**
      * 海关识别码
      */
-    @JsonPropertyDescription("海关识别码")
-    @NotBlank
-    @Size(max = 100)
-    @NotNull
     private String hsCode;
 //    /** 商家订单编号 */
 //    @NotBlank
@@ -33,14 +18,10 @@ public class ParcelItem {
     /**
      * 条形码
      */
-    @JsonPropertyDescription("条形码")
-    @Size(max = 100)
     private String barCode;
     /**
      * 品牌
      */
-    @JsonPropertyDescription("品牌")
-    @Size(max = 100)
     private String brand;
 //    /** 货物sku */
 //    @Size(max = 100)
@@ -48,16 +29,10 @@ public class ParcelItem {
     /**
      * 货物名称
      */
-    @JsonPropertyDescription("货物名称")
-    @NotBlank
-    @Size(max = 100)
-    @NotNull
     private String productName;
     /**
      * 本地化货物名称
      */
-    @JsonPropertyDescription("本地化货物名称")
-    @Size(max = 100)
     private String nativeProductName;
 //    /** 商品类型 */
 //    @Size(max = 100)
@@ -65,54 +40,30 @@ public class ParcelItem {
     /**
      * 货物描述
      */
-    @JsonPropertyDescription("货物描述")
-    @Size(max = 100)
     private String productDescription;
     /**
      * 货物单位
      */
-    @JsonPropertyDescription("货物单位")
-    @NotBlank
-    @Size(max = 100)
-    @NotNull
     private String productUnit;
     /**
      * 商品url
      */
-    @JsonPropertyDescription("商品url")
-    @NotBlank
-    @Size(max = 2000)
-    @NotNull
     private String url;
     /**
      * 原产地
      */
-    @JsonPropertyDescription("原产地")
-    @NotBlank
-    @Size(max = 100)
-    @NotNull
     private String origin;
     /**
      * 规格
      */
-    @JsonPropertyDescription("规格")
-    @NotBlank
-    @Size(max = 255)
-    @NotNull
     private String specification;
     /**
      * 毛重
      */
-    @JsonPropertyDescription("毛重")
-    @NotNull
-    @Min(0)
     private BigDecimal grossWeight;
     /**
      * 净重
      */
-    @JsonPropertyDescription("净重")
-    @NotNull
-    @Min(0)
     private BigDecimal netWeight;
 //    /**
 //     * 重量单位 公斤kg default kg optional
@@ -122,15 +73,10 @@ public class ParcelItem {
     /**
      * 单价
      */
-    @JsonPropertyDescription("单价")
-    @NotNull
-    @Min(0)
     private BigDecimal unitPrice;
     /**
      * 币种
      */
-    @JsonPropertyDescription("币种, ISO标准，例如CNY")
-    @NotNull
     private String currency;
 //    /** 单位 JGS-20 海关业务代码集 */
 //    @Size(max = 30)
@@ -138,9 +84,6 @@ public class ParcelItem {
     /**
      * 数量
      */
-    @JsonPropertyDescription("数量")
-    @NotNull
-    @Min(0)
     private Integer quantity;
 //    /** 金额 */
 //    @Min(0)

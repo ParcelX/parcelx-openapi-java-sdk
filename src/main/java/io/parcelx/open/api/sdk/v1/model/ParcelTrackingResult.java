@@ -2,26 +2,21 @@ package io.parcelx.open.api.sdk.v1.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-import javax.validation.constraints.NotNull;
-import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 public class ParcelTrackingResult {
 
     @JsonPropertyDescription("国际物流单号")
-    @NotNull
     private String trackingNo;
     @JsonPropertyDescription("电商订单编号")
-    @NotNull
     private String orderNo;
     @JsonPropertyDescription("包裹编号")
-    @NotNull
     private String parcelNo;
     /**
      * 事件列表，按照时间顺序排列
      */
     @JsonPropertyDescription("事件列表")
-    @NotNull
     private List<TrackingEvent> events;
 
     public String getTrackingNo() {
@@ -65,14 +60,12 @@ public class ParcelTrackingResult {
          * 记录时间
          */
         @JsonPropertyDescription("记录时间")
-        @NotNull
-        private Instant createTime;
+        private Date createTime;
         /**
          * 事件发生时间
          */
         @JsonPropertyDescription("事件发生时间")
-        @NotNull
-        private Instant time;
+        private Date time;
         /**
          * 地点、城市
          */
@@ -82,7 +75,6 @@ public class ParcelTrackingResult {
          * 消息
          */
         @JsonPropertyDescription("事件描述文字")
-        @NotNull
         private String message;
         /**
          * 备注
@@ -93,23 +85,22 @@ public class ParcelTrackingResult {
          * 状态代码
          */
         @JsonPropertyDescription("事件代码")
-        @NotNull
         private TrackingCode code;
 
-        public Instant getCreateTime() {
+        public Date getCreateTime() {
             return createTime;
         }
 
-        public TrackingEvent setCreateTime(Instant createTime) {
+        public TrackingEvent setCreateTime(Date createTime) {
             this.createTime = createTime;
             return this;
         }
 
-        public Instant getTime() {
+        public Date getTime() {
             return time;
         }
 
-        public TrackingEvent setTime(Instant time) {
+        public TrackingEvent setTime(Date time) {
             this.time = time;
             return this;
         }

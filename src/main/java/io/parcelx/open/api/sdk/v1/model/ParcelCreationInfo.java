@@ -3,12 +3,8 @@ package io.parcelx.open.api.sdk.v1.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 public class ParcelCreationInfo {
@@ -17,34 +13,27 @@ public class ParcelCreationInfo {
      * 链路识别码
      */
     @JsonPropertyDescription("链路识别码")
-    @Size(max = 36)
-    @NotNull
     private String routeCode;
 
     @JsonPropertyDescription("链路编号")
-    @Size(max = 36)
     private String routeNo;
 
     /**
      * 线上订单号
      */
     @JsonPropertyDescription("线上订单号")
-    @Size(max = 100)
-    @NotNull
     private String onlineOrderNo;
 
     /**
      * 发货人站点代码 optional
      */
     @JsonPropertyDescription("发货人站点代码")
-    @Size(max = 100)
     private String facility;
 
     /**
      * 批次号
      */
     @JsonPropertyDescription("批次号")
-    @Size(max = 100)
     private String lot;
 
     /**
@@ -58,30 +47,24 @@ public class ParcelCreationInfo {
      * 包裹里面的sku种类数量
      */
     @JsonPropertyDescription("包裹里面的sku种类数量")
-    @Min(0)
     private Integer skuNumber;
 
     /**
      * 体积
      */
     @JsonPropertyDescription("体积")
-    @Min(0)
     private BigDecimal volume;
 
     /**
      * 毛重
      */
     @JsonPropertyDescription("毛重")
-    @Min(0)
-    @NotNull
     private BigDecimal grossWeight;
 
     /**
      * 净重
      */
     @JsonPropertyDescription("净重")
-    @Min(0)
-    @NotNull
     private BigDecimal netWeight;
 
     /**
@@ -95,7 +78,6 @@ public class ParcelCreationInfo {
      * 保险费 optional 默认是0
      */
     @JsonPropertyDescription("保险费 optional 默认是0")
-    @Min(0)
     @JsonProperty(defaultValue = "0.0")
     private BigDecimal insuranceFee = BigDecimal.ZERO;
 
@@ -103,7 +85,6 @@ public class ParcelCreationInfo {
      * 包裹折扣 默认是0
      */
     @JsonPropertyDescription("包裹折扣 默认是0")
-    @Min(0)
     @JsonProperty(defaultValue = "0.0")
     private BigDecimal discount = BigDecimal.ZERO;
 
@@ -111,7 +92,6 @@ public class ParcelCreationInfo {
      * 包裹税费 默认是0
      */
     @JsonPropertyDescription("包裹税费 默认是0")
-    @Min(0)
     @JsonProperty(defaultValue = "0.0")
     private BigDecimal totalTax = BigDecimal.ZERO;
 
@@ -119,7 +99,6 @@ public class ParcelCreationInfo {
      * 运杂费 默认是0
      */
     @JsonPropertyDescription("运杂费 默认是0")
-    @Min(0)
     @JsonProperty(defaultValue = "0.0")
     private BigDecimal freight = BigDecimal.ZERO;
 
@@ -127,99 +106,78 @@ public class ParcelCreationInfo {
      * 包裹总金额
      */
     @JsonPropertyDescription("包裹总金额")
-    @Min(0)
-    @NotNull
     private BigDecimal itemAmount;
 
     /**
      * 包裹贸易国
      */
     @JsonPropertyDescription("包裹贸易国, 使用ISO二字码，例如CN")
-    @NotNull
     private String tradeCountry;
 
     /**
      * 付款人法定姓名
      */
     @JsonPropertyDescription("付款人法定姓名")
-    @Size(max = 50)
-    @NotNull
     private String payerLegalName;
 
     /**
      * 付款人证件类型
      */
     @JsonPropertyDescription("付款人证件类型")
-    @Size(max = 30)
-    @NotNull
     private String payerIdType;
 
     /**
      * 付款人证件号
      */
     @JsonPropertyDescription("付款人证件号")
-    @Size(max = 30)
-    @NotNull
     private String payerIdNo;
 
     /**
      * 付款人手机号
      */
     @JsonPropertyDescription("付款人手机号")
-    @Size(max = 30)
-    @NotNull
     private String payerPhone;
 
     /**
      * 付款人证件照
      */
     @JsonPropertyDescription("付款人证件照")
-    @Size(max = 255)
     private String payerIdPicture;
 
     /**
      * 付款人证件照_2
      */
     @JsonPropertyDescription("付款人证件照_2")
-    @Size(max = 255)
     private String payerIdPicture2;
 
     /**
      * 支付公司
      */
     @JsonPropertyDescription("支付公司")
-    @Size(max = 100)
-    @NotNull
     private String paymentCompanyName;
 
     /**
      * 支付公司编码
      */
     @JsonPropertyDescription("支付公司编码")
-    @Size(max = 50)
     private String paymentCompanyCode;
 
     /**
      * 支付流水编号
      */
     @JsonPropertyDescription("支付流水编号")
-    @Size(max = 100)
-    @NotNull
     private String paymentOrderNo;
 
     /**
      * 支付时间
      */
     @JsonPropertyDescription("支付时间")
-    @NotNull
-    private Instant paymentTime;
+    private Date paymentTime;
 
     /**
      * 支付金额
      */
     @JsonPropertyDescription("支付金额")
-    @Min(0)
-    @NotNull
     private BigDecimal paymentAmount;
 
     /**
@@ -233,26 +191,22 @@ public class ParcelCreationInfo {
      * 发件人证件类型 （怎么填都行）
      */
     @JsonPropertyDescription("发件人证件类型")
-    @Size(max = 30)
     private String senderIdType;
 
     /**
      * 发件人证件号 （怎么填都行）
      */
     @JsonPropertyDescription("发件人证件号")
-    @Size(max = 30)
     private String senderIdNo;
     /**
      * 寄件人身份证号正面URL（不大于3M）
      */
     @JsonPropertyDescription("寄件人身份证号正面URL")
-    @Size(max = 255)
     private String senderIdcardFront;
     /**
      * 寄件人身份证号反面URL（不大于3M）
      */
     @JsonPropertyDescription("寄件人身份证号反面URL")
-    @Size(max = 255)
     private String senderIdcardBack;
 
     /**
@@ -265,81 +219,65 @@ public class ParcelCreationInfo {
      * 发件人一级行政区
      */
     @JsonPropertyDescription("发件人一级行政区")
-    @Size(max = 100)
     private String senderPrimaryAdministrative;
 
     /**
      * 发件人二级行政区
      */
     @JsonPropertyDescription("发件人二级行政区")
-    @Size(max = 100)
     private String senderSecondAdministrative;
 
     /**
      * 发件人地址
      */
     @JsonPropertyDescription("发件人地址")
-    @Size(max = 100)
-    @NotNull
     private String senderAddress;
 
     /**
      * 发件人门牌号
      */
     @JsonPropertyDescription("发件人门牌号")
-    @Size(max = 100)
     private String senderStreetNum;
 
     /**
      * 发件人邮编
      */
     @JsonPropertyDescription("发件人邮编")
-    @Size(max = 100)
     private String senderPostcode;
 
     /**
      * 发件人公司
      */
     @JsonPropertyDescription("发件人公司")
-    @Size(max = 100)
-    @NotNull
     private String senderCompanyName;
 
     /**
      * 发件人姓名
      */
     @JsonPropertyDescription("发件人姓名")
-    @Size(max = 50)
-    @NotNull
     private String senderName;
 
     /**
      * 发件人手机号
      */
     @JsonPropertyDescription("发件人手机号")
-    @Size(max = 30)
-    @NotNull
     private String senderPhone;
 
     /**
      * 发件人邮箱
      */
     @JsonPropertyDescription("发件人邮箱")
-    @Email
-    @Size(max = 100)
     private String senderEmail;
 
     /**
      * 收件人证件类型
      */
     @JsonPropertyDescription("收件人证件类型")
-    @Size(max = 100)
     private String recipientIdType;
     /**
      * 收件人证件号
      */
     @JsonPropertyDescription("收件人证件号")
-    @Size(max = 100)
     private String recipientIdNo;
 
     /**
@@ -352,109 +290,90 @@ public class ParcelCreationInfo {
      * 收件人一级行政区
      */
     @JsonPropertyDescription("收件人一级行政区")
-    @Size(max = 100)
     private String recipientPrimaryAdministrative;
 
     /**
      * 收件人二级行政区
      */
     @JsonPropertyDescription("收件人二级行政区")
-    @Size(max = 100)
     private String recipientSecondAdministrative;
 
     /**
      * 收件人三级行政区
      */
     @JsonPropertyDescription("收件人三级行政区")
-    @Size(max = 100)
     private String recipientThirdAdministrative;
 
     /**
      * 收件人地址
      */
     @JsonPropertyDescription("收件人地址")
-    @Size(max = 100)
-    @NotNull
     private String recipientAddress;
 
     /**
      * 收件人门牌号
      */
     @JsonPropertyDescription("收件人门牌号")
-    @Size(max = 100)
     private String recipientStreetNum;
 
     /**
      * 收件人邮编
      */
     @JsonPropertyDescription("收件人邮编")
-    @Size(max = 100)
     private String recipientPostcode;
 
     /**
      * 收件人公司
      */
     @JsonPropertyDescription("收件人公司")
-    @Size(max = 100)
     private String recipientCompanyName;
 
     /**
      * 收件人姓名
      */
     @JsonPropertyDescription("收件人姓名")
-    @Size(max = 50)
-    @NotNull
     private String recipientName;
 
     /**
      * 收件人电话
      */
     @JsonPropertyDescription("收件人电话")
-    @Size(max = 30)
-    @NotNull
     private String recipientPhone;
 
     /**
      * 收件人邮箱
      */
     @JsonPropertyDescription("收件人邮箱")
-    @Email
-    @Size(max = 100)
     private String recipientEmail;
 
     /**
      * 退件人邮编
      */
     @JsonPropertyDescription("退件人邮编")
-    @Size(max = 100)
     private String returnPostcode;
 
     /**
      * 退件人门牌号
      */
     @JsonPropertyDescription("退件人门牌号")
-    @Size(max = 100)
     private String returnStreetNum;
 
     /**
      * 退件人详细地址
      */
     @JsonPropertyDescription("退件人详细地址")
-    @Size(max = 100)
     private String returnAddress;
 
     /**
      * 退件人二级行政区
      */
     @JsonPropertyDescription("退件人二级行政区址")
-    @Size(max = 100)
     private String returnSecondAdministrative;
 
     /**
      * 退件人一级行政区
      */
     @JsonPropertyDescription("退件人一级行政区")
-    @Size(max = 100)
     private String returnPrimaryAdministrative;
 
     /**
@@ -467,28 +386,24 @@ public class ParcelCreationInfo {
      * 退件人邮箱
      */
     @JsonPropertyDescription("退件人邮箱")
-    @Email
     private String returnEmail;
 
     /**
      * 退件人电话
      */
     @JsonPropertyDescription("退件人电话")
-    @Size(max = 30)
     private String returnPhone;
 
     /**
      * 退件人名称
      */
     @JsonPropertyDescription("退件人名称")
-    @Size(max = 30)
     private String returnName;
 
     /**
      * 退件人企业名称
      */
     @JsonPropertyDescription("退件人企业名称")
-    @Size(max = 100)
     private String returnCompanyName;
 
     /**
@@ -501,57 +416,47 @@ public class ParcelCreationInfo {
      * 购买人在电商的账号
      */
     @JsonPropertyDescription("购买人在电商的账号")
-    @Size(max = 30)
     private String buyerEcAccount;
 
     /**
      * 购买人全名
      */
     @JsonPropertyDescription("购买人全名")
-    @Size(max = 30)
     private String buyerFullName;
 
     /**
      * 购买人电话
      */
     @JsonPropertyDescription("购买人电话")
-    @Size(max = 30)
     private String buyerPhone;
 
     /** 购买人证件类型 */
-    /**
-     * TODO: 修改数据库类型
-     **/
     @JsonPropertyDescription("购买人证件类型")
-    @Size(max = 30)
     private String buyerIdType;
 
     /**
      * 购买人证件号码
      */
     @JsonPropertyDescription("购买人证件号码")
-    @Size(max = 30)
     private String buyerIdNo;
 
     /**
      * 购买人证件照片
      */
     @JsonPropertyDescription("购买人证件照片")
-    @Size(max = 255)
     private String buyerIdPicture;
 
     /**
      * 购买人证件照片2
      */
     @JsonPropertyDescription("购买人证件照片2")
-    @Size(max = 255)
     private String buyerIdPicture2;
 
     /**
      * 预计入库时间 预估什么时候送到物流商仓库的时间
      */
     @JsonPropertyDescription("预计入库时间 预估什么时候送到物流商仓库的时间")
-    private Instant predictPutTime;
+    private Date predictPutTime;
 
     /**
      * 是否需要人签收，0不需要，1需要。默认不需要
@@ -570,28 +475,24 @@ public class ParcelCreationInfo {
      * 电商企业的登记名称，对应清单的收发货人。
      */
     @JsonPropertyDescription("电商企业的登记名称，对应清单的收发货人")
-    @Size(max = 50)
     private String ebcName;
 
     /**
      * 电商企业在海关注册登记编号或统一社会信用代码，对应清单的收发货人。
      */
     @JsonPropertyDescription("电商企业在海关注册登记编号或统一社会信用代码，对应清单的收发货人")
-    @Size(max = 50)
     private String ebcCode;
 
     /**
      * 电商平台的登记名称
      */
     @JsonPropertyDescription("电商平台的登记名称")
-    @Size(max = 50)
     private String ebpName;
 
     /**
      * 电商平台在海关注册登记编号或统一社会信用代码
      */
     @JsonPropertyDescription("电商平台在海关注册登记编号或统一社会信用代码")
-    @Size(max = 50)
     private String ebpCode;
 
     /**
@@ -611,8 +512,6 @@ public class ParcelCreationInfo {
      * 商品列表
      */
     @JsonPropertyDescription("商品列表")
-    @NotNull
-    @Size(min = 1)
     private List<ParcelItem> items;
 
     public List<ParcelItem> getItems() {
@@ -831,11 +730,11 @@ public class ParcelCreationInfo {
         this.paymentOrderNo = paymentOrderNo;
     }
 
-    public Instant getPaymentTime() {
+    public Date getPaymentTime() {
         return paymentTime;
     }
 
-    public void setPaymentTime(Instant paymentTime) {
+    public void setPaymentTime(Date paymentTime) {
         this.paymentTime = paymentTime;
     }
 
@@ -1215,11 +1114,11 @@ public class ParcelCreationInfo {
         this.buyerIdPicture2 = buyerIdPicture2;
     }
 
-    public Instant getPredictPutTime() {
+    public Date getPredictPutTime() {
         return predictPutTime;
     }
 
-    public void setPredictPutTime(Instant predictPutTime) {
+    public void setPredictPutTime(Date predictPutTime) {
         this.predictPutTime = predictPutTime;
     }
 

@@ -2,9 +2,6 @@ package io.parcelx.open.api.sdk.v1.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 public class ParcelLabelParam {
 
     /**
@@ -27,13 +24,11 @@ public class ParcelLabelParam {
      * label 文件的 base64 编码
      */
     @JsonPropertyDescription("生成面单文件的Base64的编码")
-    @NotBlank
     private String labelContent;
     /**
      * UBI追踪单号，也就是国际物流单号
      */
     @JsonPropertyDescription("包裹的国际快递单号")
-    @Size(max = 100)
     private String trackingNo;
 
     public String getTrackingNo() {
