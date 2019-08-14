@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.parcelx</groupId>
     <artifactId>parcelx-openapi-sdk</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <name>parcelx-openapi-sdk</name>
     <description>ParcelX OpenApi client side JAVA SDK.</description>
