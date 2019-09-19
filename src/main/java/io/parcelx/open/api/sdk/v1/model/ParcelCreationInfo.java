@@ -10,6 +10,11 @@ import java.util.List;
 public class ParcelCreationInfo {
 
     /**
+     * ParcelX的包裹编号
+     */
+    private String parcelNo;
+
+    /**
      * 链路识别码
      */
     @JsonPropertyDescription("链路识别码")
@@ -513,6 +518,14 @@ public class ParcelCreationInfo {
      */
     @JsonPropertyDescription("商品列表")
     private List<ParcelItem> items;
+
+    public String getParcelNo() {
+        return parcelNo;
+    }
+
+    public void setParcelNo(String parcelNo) {
+        this.parcelNo = parcelNo;
+    }
 
     public List<ParcelItem> getItems() {
         return items;
