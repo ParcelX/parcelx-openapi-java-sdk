@@ -11,6 +11,7 @@ import okhttp3.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
 
@@ -38,7 +39,11 @@ public class OkHttpJsonRpcInvoker implements JsonRpcInvoker {
     }
 
     private static OkHttpClient getDefaultClient() {
-        return new OkHttpClient.Builder().build();
+        return new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
     }
 
     @Override
