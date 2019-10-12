@@ -87,6 +87,12 @@ public class ParcelTrackingResult {
         @JsonPropertyDescription("事件代码")
         private TrackingCode code;
 
+        /**
+         * 是否同步到了yto
+         */
+        @JsonPropertyDescription("是否上传到了yto, 0是未同步， 1是同步失败，2是同步成功")
+        private Integer uploadYtoFlag;
+
         public Date getCreateTime() {
             return createTime;
         }
@@ -138,6 +144,15 @@ public class ParcelTrackingResult {
 
         public TrackingEvent setCode(TrackingCode status) {
             this.code = status;
+            return this;
+        }
+
+        public Integer getUploadYtoFlag() {
+            return uploadYtoFlag;
+        }
+
+        public TrackingEvent setUploadYtoFlag(Integer uploadYtoFlag) {
+            this.uploadYtoFlag = uploadYtoFlag;
             return this;
         }
     }

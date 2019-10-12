@@ -9,25 +9,10 @@ import java.io.UnsupportedEncodingException;
 
 public interface IProviderApi extends JsonRpcInvoker {
 
-    ParcelRouteResult getRoute(String routeCode) throws ApiException;
+    void reportTrackingEvent(ParcelNoParam parcelNo, TrackingEventParam trackingEvent) throws ApiException;
 
-    ParcelListQueryResult queryParcelList(ParcelListQueryParam query) throws ApiException;
-
-    ParcelInfoResult getParcelInfo(ParcelNoParam parcelNo) throws ApiException;
-
-    void reportTrackingNumber(ParcelNoParam parcelNo, String trackingNo) throws ApiException;
+    ParcelTrackingResult getTracking(ParcelNoParam parcelNo) throws ApiException;
 
     ParcelLabelResult getLabel(ParcelNoParam parcelNo) throws ApiException;
 
-    void reportLabel(ParcelNoParam parcelNo, ParcelLabelParam label) throws ApiException;
-
-    void reportWeight(ParcelNoParam parcelNo, double weight) throws ApiException;
-
-    void reportLading(ParcelNoParam parcelNo, ParcelLadingParam lading) throws ApiException;
-
-    void reportTrackingEvent(ParcelNoParam parcelNo, TrackingEventParam trackingEvent) throws ApiException;
-
-    void reportServiceComplete(ParcelNoParam parcelNo, ServiceCompleteInfoParam completeInfo) throws ApiException;
-
-    void reportException(ParcelNoParam parcelNo, ParcelExceptionParam exception) throws ApiException;
 }
