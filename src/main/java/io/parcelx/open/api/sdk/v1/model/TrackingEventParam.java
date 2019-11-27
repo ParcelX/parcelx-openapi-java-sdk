@@ -23,6 +23,12 @@ public class TrackingEventParam {
     @JsonPropertyDescription("轨迹事件备注信息")
     private String remark;
 
+    @JsonPropertyDescription("设施编码 例如：网点代码、仓库代码")
+    private String facilityCode;
+
+    @JsonPropertyDescription("拓展字段，使用json字符串")
+    private String vendors;
+
     public TrackingCode getCode() {
         return code;
     }
@@ -66,5 +72,21 @@ public class TrackingEventParam {
     public TrackingEventParam setRemark(String remark) {
         this.remark = remark;
         return this;
+    }
+
+    public String getFacilityCode() {
+        return facilityCode;
+    }
+
+    public void setFacilityCode(String facilityCode) {
+        this.facilityCode = facilityCode;
+    }
+
+    public String getVendors() {
+        return vendors;
+    }
+
+    public void setVendors(String vendors) {
+        this.vendors = vendors;
     }
 }

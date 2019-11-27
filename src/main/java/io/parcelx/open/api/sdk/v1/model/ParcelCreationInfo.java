@@ -12,6 +12,7 @@ public class ParcelCreationInfo {
     /**
      * ParcelX的包裹编号
      */
+    @JsonPropertyDescription("ParcelX的包裹编号")
     private String parcelNo;
 
     /**
@@ -435,7 +436,9 @@ public class ParcelCreationInfo {
     @JsonPropertyDescription("购买人电话")
     private String buyerPhone;
 
-    /** 购买人证件类型 */
+    /**
+     * 购买人证件类型
+     */
     @JsonPropertyDescription("购买人证件类型")
     private String buyerIdType;
 
@@ -514,10 +517,29 @@ public class ParcelCreationInfo {
     private Object vendors;
 
     /**
+     * 站点代码
+     */
+    @JsonPropertyDescription("站点代码")
+    private String terminalCode;
+
+    /**
+     * 仓库代码
+     */
+    @JsonPropertyDescription("仓库代码")
+    private String warehouseCode;
+
+    /**
+     * 商品代码
+     */
+    @JsonPropertyDescription("商品代码")
+    private String productCode;
+
+    /**
      * 商品列表
      */
     @JsonPropertyDescription("商品列表")
     private List<ParcelItem> items;
+
 
     public String getParcelNo() {
         return parcelNo;
@@ -1197,5 +1219,29 @@ public class ParcelCreationInfo {
 
     public void setVendors(Object vendors) {
         this.vendors = vendors;
+    }
+
+    public String getTerminalCode() {
+        return terminalCode;
+    }
+
+    public void setTerminalCode(String terminalCode) {
+        this.terminalCode = terminalCode;
+    }
+
+    public String getWarehouseCode() {
+        return warehouseCode;
+    }
+
+    public void setWarehouseCode(String warehouseCode) {
+        this.warehouseCode = warehouseCode;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 }
