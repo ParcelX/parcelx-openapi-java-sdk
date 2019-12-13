@@ -23,6 +23,16 @@ public enum TrackingCode {
 
     CLEARANCE_END(3005, "CR_END", "清关结束"),
 
+    CLEARANCE_ERROR_3101(3101, "CR_ERROR_3101", "清关异常-海关暂扣"),
+
+    CLEARANCE_ERROR_3102(3102, "CR_ERROR_3102", "清关异常-有货无单"),
+
+    CLEARANCE_ERROR_3103(3103, "CR_ERROR_3103", "清关异常-有单无货"),
+
+    CLEARANCE_ERROR_3104(3104, "CR_ERROR_3104", "清关异常-清关前遗失"),
+
+    CLEARANCE_ERROR_3105(3105, "CR_ERROR_3105", "清关异常-清关后遗失"),
+
     DELIVERING(4003, "DELIVERING", "配送中"),
 
     USER_SIGNED(4005, "SINGED", "已签收");
